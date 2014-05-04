@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/adapterCzas"
+            android:id="@+id/tvCzas" android:layout_gravity="center_vertical"
+            android:layout_marginLeft="52dp"
+            android:layout_alignBottom="@+id/cbCzyOdbyty" android:layout_alignParentStart="true"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adapterOdbyty"
+            android:id="@+id/cbCzyOdbyty"
+            android:layout_marginRight="35dp" android:layout_below="@+id/tvData" android:layout_alignParentEnd="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/adapterData"
+            android:id="@+id/tvData"
+            android:layout_marginTop="31dp" android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
+
+</RelativeLayout>
