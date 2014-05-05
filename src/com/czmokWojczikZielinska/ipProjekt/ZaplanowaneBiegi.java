@@ -18,14 +18,14 @@ public class ZaplanowaneBiegi extends Activity
 
     public void onCreate(Bundle savedInstanceState)
     {
-        lv=(ListView) findViewById(R.id.listView);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zaplanowane_biegi);
-
+        lv=(ListView) findViewById(R.id.listView);
         MySQLiteHelper db=new MySQLiteHelper(this.getApplicationContext());
         List<TabelaDataCzas> dt;
         dt=db.getAllDataCzas();
-        adapter = new ListAdapterCustom(this,dt);
+        adapter = new ListAdapterCustom(ZaplanowaneBiegi.this,dt);
         int i=adapter.getCount();
         if(i>0)
         {

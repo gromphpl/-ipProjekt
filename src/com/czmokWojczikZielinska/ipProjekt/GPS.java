@@ -7,6 +7,7 @@ package com.czmokWojczikZielinska.ipProjekt;
  * Time: 19:05
  * To change this template use File | Settings | File Templates.
  */
+import java.util.Calendar;
 import java.util.Date;
 
 import android.location.Location;
@@ -25,6 +26,8 @@ public class GPS extends Activity {
     private TextView tvLongitude;
     private TextView tvLatitude;
     private TextView tvInformations;
+    String czas;
+    String data;
     int j=0;
     double wynik=0;
 
@@ -59,6 +62,15 @@ public class GPS extends Activity {
             tvProvider.setText("GPS wlaczaony");
         else
             tvProvider.setText("Gps nie wlaczony,prosze wlaczyc");
+        Calendar kal=Calendar.getInstance();
+        int dzien=kal.get(Calendar.DATE);
+        int miesiac=kal.get(Calendar.MONTH);
+        int rok=kal.get(Calendar.YEAR);
+        int godzina=kal.get(Calendar.HOUR);
+        int minuta=kal.get(Calendar.MINUTE);
+
+        data=dzien+"."+miesiac+"."+rok;
+        czas=godzina+":"+minuta;
     }
 
     @Override
@@ -111,5 +123,12 @@ public class GPS extends Activity {
 
         }
         tvInformations.setText(infos);
+
+        //MySQLiteHelper db=new MySQLiteHelper(this);
+        //Bieg b=new Bieg();
+        //b.setDataBiegu(data);
+        //b.setCzasBiegu(czas);
+        //db.dodajRekordBieg(b);
     }
+
 }
