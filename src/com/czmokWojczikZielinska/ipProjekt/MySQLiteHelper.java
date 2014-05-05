@@ -125,6 +125,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         pokazDT.setCzas(cursor.getString(2));
         pokazDT.setCzyBiegOdbyty(Boolean.parseBoolean(cursor.getString(3)));
 
+        cursor.close();
+        db.close();
         return pokazDT;
     }
 
@@ -154,6 +156,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         pokazB.setPredkoscBiegu(Double.parseDouble(cursor.getString(4))); //predkosc
         pokazB.setCzasPrzebiegniecia(Double.parseDouble(cursor.getString(5))); //czas przebiegniecia
 
+        cursor.close();
+        db.close();
         return pokazB;
     }
 
@@ -177,6 +181,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper
                 dataCzasList.add(dt);
             } while (cursor.moveToNext());
         }
+
+        cursor.close();
+        db.close();
         return dataCzasList;
     }
 
@@ -202,6 +209,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper
             }
             while (cursor.moveToNext());
         }
+
+        cursor.close();
+        db.close();
+
         return biegList;
     }
 
@@ -212,6 +223,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
 
+        db.close();
         return cursor.getCount();
     }
 
@@ -221,11 +233,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
+        db.close();
         return cursor.getCount();
     }
 
 
-    public int updateDataCzas(TabelaDataCzas dt)
+    public void updateDataCzas(TabelaDataCzas dt)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -233,12 +246,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         values.put(KEY_DATA, dt.getData());
         values.put(KEY_CZAS, dt.getCzas());
         values.put(KEY_CZYODBYTY, dt.getCzyBiegOdbyty());
+        int id=dt.getId();
 
-        return db.update(TABLE_DATACZAS, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(dt.getId()) });
+        db.update(TABLE_DATACZAS, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(id) });
+        db.close();
     }
 
-    public int updateBieg(Bieg b)
+    public void updateBieg(Bieg b)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -249,9 +264,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         values.put(KEY_CZASPRZEBIEGNIECIA,b.getCzasPrzebiegniecia());
         values.put(KEY_DYSTANS,b.getPrzebiegnietyDystans());
 
-
-        return db.update(TABLE_BIEG, values, KEY_IDBIEG + " = ?",
+        db.update(TABLE_BIEG, values, KEY_IDBIEG + " = ?",
                 new String[] { String.valueOf(b.getIdBiegu()) });
+        db.close();
     }
 
     public void deleteDataCzas(TabelaDataCzas dt)

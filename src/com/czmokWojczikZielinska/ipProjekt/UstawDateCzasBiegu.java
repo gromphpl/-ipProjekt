@@ -54,6 +54,8 @@ public class UstawDateCzasBiegu extends Activity {
                             if(i.getCzyBiegOdbyty()==false)
                             {
                                 amList.add(new AlarmModel(i));
+                                i.setCzyBiegOdbyty(true);
+                                db.updateDataCzas(i);
                             }
                         }
 
@@ -62,10 +64,7 @@ public class UstawDateCzasBiegu extends Activity {
                         for(int i=0;i<amList.size();i++)
                         {
                             UstawAlarm(amList.get(i));
-                            int id=amList.get(i).getID();
-                            TabelaDataCzas pojedynczyRekord=db.showOneDataCzas(id);
-                            pojedynczyRekord.setCzyBiegOdbyty(true);
-                            db.updateDataCzas(pojedynczyRekord);
+
                         }
 
 
@@ -615,12 +614,6 @@ public class UstawDateCzasBiegu extends Activity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-		/*
-		 * The following sets the Alarm in the specific time by getting the long
-		 * value of the alarm date time which is in calendar object by calling
-		 * the getTimeInMillis(). Since Alarm supports only long value , we're
-		 * using this method.
-		 */
         alarmManager.set(AlarmManager.RTC, am.getCalendarDate().getTimeInMillis(),
                 pendingIntent);
     }
