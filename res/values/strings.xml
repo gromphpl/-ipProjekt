@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MyActivity</string>
+    <string name="gps_on">GPS wlaczaony</string>
+    <string name="gps_off">GPS wlaczaony</string>
+    <string name="width">szerokość:</string>
+    <string name="lenght">długość:</string>
+    <string name="distance">dystans:</string>
+    <string name="cant_calculate">can\'t calculate</string>
+    <string name="accurancy">Dokładność:</string>
+    <string name="last_fix">Last fix:</string>
+    <string name="speed">Prędkość:</string>
+    <string name="use_gps">Użycie GPS</string>
+    <string name="possiton">Twoja pozycja:</string>
+    <string name="extra_infp"> Dodatkowe info:</string>
+
 </resources>

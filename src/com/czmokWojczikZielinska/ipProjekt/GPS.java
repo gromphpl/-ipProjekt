@@ -59,9 +59,9 @@ public class GPS extends Activity {
         tvInformations = (TextView) findViewById(R.id.tvInformations);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-            tvProvider.setText("GPS wlaczaony");
+            tvProvider.setText(R.string.gps_on);
         else
-            tvProvider.setText("Gps nie wlaczony,prosze wlaczyc");
+            tvProvider.setText(R.string.gps_off);
         Calendar kal=Calendar.getInstance();
         int dzien=kal.get(Calendar.DATE);
         int miesiac=kal.get(Calendar.MONTH);
@@ -88,8 +88,8 @@ public class GPS extends Activity {
     }
 
     private void showLocation(Location location) {
-        String latitude = "Szerokosc: ";
-        String longitude = "Dlugosc: ";
+        String latitude = getString(R.string.width);
+        String longitude = getString(R.string.lenght);
         if (location != null) {
             latitude += location.getLatitude();
             longitude += location.getLongitude();
@@ -107,16 +107,16 @@ public class GPS extends Activity {
     private void showAdditionalInfo(Location location) {
         double wynik=0;
         double[] tab=new double[5];
-        String infos = "Dystans";
+        String infos = getString(R.string.distance);
         if (savedLocation == null || location == null) {
-            infos += "can't calculate";
+            infos += getString(R.string.cant_calculate);
         } else {
             infos += savedLocation.distanceTo(location) + "m\n";
-            infos += "Dokladnosc ";
+            infos += getString(R.string.accurancy);
             infos += location.getAccuracy() + "m \n";
-            infos += "Last fix: ";
+            infos += getString(R.string.last_fix);
             infos += new Date(location.getTime()) + "\n";
-            infos += "Predkosc ";
+            infos += getString(R.string.speed);
             infos += location.getSpeed() + "m/s";
             // wynik=wynik+location.getSpeed();
             liczSume(location.getSpeed());

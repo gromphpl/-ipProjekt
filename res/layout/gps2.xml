@@ -9,7 +9,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:text="Uzycie gps:" />
+            android:text="@string/use_gps" />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,21 +20,20 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:text="Twoja pozycja" />
+            android:text="@string/possiton" />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvLatitude" android:text="Szerokosc: czekaj"/>
+            android:id="@+id/tvLatitude" android:text="@string/width"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvLongitude" android:text="Dlugos: czekaj"/>
+            android:id="@+id/tvLongitude" android:text="@string/lenght"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dodatkowe inf:"
             android:textSize="20sp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center" android:text="@string/extra_infp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
