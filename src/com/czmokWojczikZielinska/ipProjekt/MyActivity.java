@@ -27,7 +27,7 @@ public class MyActivity extends Activity {
                     public void onClick(View view)
                     {
                         Intent myIntent = new Intent(view.getContext(), UstawDateCzasBiegu.class);
-                        startActivityForResult(myIntent, 0);
+                        startActivity(myIntent);
                     }
 
                 }
@@ -39,7 +39,7 @@ public class MyActivity extends Activity {
                     public void onClick(View view)
                     {
                         Intent myIntent = new Intent(view.getContext(), ZaplanowaneBiegi.class);
-                        startActivityForResult(myIntent, 0);
+                        startActivity(myIntent);
                     }
 
                 }
@@ -51,7 +51,7 @@ public class MyActivity extends Activity {
                     public void onClick(View view)
                     {
                         Intent myIntent = new Intent(view.getContext(), GPS.class);
-                        startActivityForResult(myIntent, 0);
+                        startActivity(myIntent);
                     }
 
                 }
