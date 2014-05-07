@@ -10,21 +10,34 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="adapterCzas"
             android:id="@+id/tvCzas" android:layout_gravity="center_vertical"
-            android:layout_marginLeft="52dp"
-            android:layout_alignBottom="@+id/cbCzyOdbyty" android:layout_alignParentStart="true"/>
+            android:layout_marginLeft="27dp"
+            android:layout_alignBottom="@+id/cbCzyOdbyty" android:layout_toRightOf="@+id/textView"/>
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="adapterOdbyty"
+            android:text="Zaplanowany"
             android:id="@+id/cbCzyOdbyty"
-            android:layout_marginRight="35dp" android:layout_below="@+id/tvData" android:layout_alignParentEnd="true"/>
+            android:layout_alignTop="@+id/textView2" android:layout_alignParentRight="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="adapterData"
             android:id="@+id/tvData"
-            android:layout_marginTop="31dp" android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_marginTop="32dp"
+            android:layout_alignParentTop="true" android:layout_alignLeft="@+id/tvCzas"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="CZAS: "
+            android:id="@+id/textView" android:layout_alignBottom="@+id/tvCzas" android:layout_alignParentLeft="true"
+            android:layout_marginLeft="22dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="DATA: "
+            android:id="@+id/textView2" android:layout_alignBottom="@+id/tvData" android:layout_toLeftOf="@+id/tvCzas"/>
 
 </RelativeLayout>

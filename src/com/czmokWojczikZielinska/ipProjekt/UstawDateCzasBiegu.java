@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.method.DateTimeKeyListener;
@@ -24,14 +25,17 @@ import java.util.*;
 
 
 //klasa zajmuje sie harmonogramem biegow
-public class UstawDateCzasBiegu extends Activity {
+public class UstawDateCzasBiegu extends Activity
+{
+
+    MySQLiteHelper db;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ustaw_date_czas);
 
-        final MySQLiteHelper db=new MySQLiteHelper(this);
+        db=new MySQLiteHelper(this);
 
 
         Button btnUstawNastepnyBieg = (Button) findViewById(R.id.btnUstaw);
@@ -49,12 +53,19 @@ public class UstawDateCzasBiegu extends Activity {
 
                         List<TabelaDataCzas> dt=db.getAllDataCzas();
 
+                        UsunJesliDataPrzeszla(dt);
+
+                        dt.clear();
+
+                        dt=db.getAllDataCzas();
+
                         for(TabelaDataCzas i:dt)
                         {
                             if(i.getCzyBiegOdbyty()==false)
                             {
                                 amList.add(new AlarmModel(i));
                                 i.setCzyBiegOdbyty(true);
+                                i.setData("31.12.2016");
                                 db.updateDataCzas(i);
                             }
                         }
@@ -102,7 +113,7 @@ public class UstawDateCzasBiegu extends Activity {
         int godzina = wybranyCzasBiegu.getCurrentHour();
         int minuta = wybranyCzasBiegu.getCurrentMinute();
         int rok=obecnaData.get(Calendar.YEAR);
-        int miesiac=obecnaData.get(Calendar.MONTH);
+        int miesiac=obecnaData.get(Calendar.MONTH)+1;
         int dzien=obecnaData.get(Calendar.DAY_OF_MONTH);
         String aktualnyDzienTygodnia=DzienTygodnia();
 
@@ -616,5 +627,29 @@ public class UstawDateCzasBiegu extends Activity {
 
         alarmManager.set(AlarmManager.RTC, am.getCalendarDate().getTimeInMillis(),
                 pendingIntent);
+
+    }
+
+    public void UsunJesliDataPrzeszla(List<TabelaDataCzas> dt)
+    {
+        for(TabelaDataCzas i:dt)
+        {
+            String czasTemp=i.getCzas();
+            String dataTemp=i.getData();
+            StringTokenizer StringData = new StringTokenizer(dataTemp, ".");
+            StringTokenizer StringCzas = new StringTokenizer(czasTemp, ":");
+            int dzien=Integer.parseInt(StringData.nextToken());
+            int miesiac=Integer.parseInt(StringData.nextToken())-1;
+            int rok=Integer.parseInt(StringData.nextToken());
+            int godzina=Integer.parseInt(StringCzas.nextToken());
+            int minuta=Integer.parseInt(StringCzas.nextToken());
+            Calendar dataZBazy=Calendar.getInstance();
+            dataZBazy.set(rok,miesiac,dzien,godzina,minuta);
+            if(dataZBazy.before(Calendar.getInstance()))
+            {
+                db.deleteDataCzas(i);
+            }
+        }
+
     }
 }

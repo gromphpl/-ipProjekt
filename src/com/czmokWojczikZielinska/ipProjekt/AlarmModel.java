@@ -36,7 +36,7 @@ public class AlarmModel
             StringTokenizer StringData = new StringTokenizer(data, ".");
             StringTokenizer StringCzas = new StringTokenizer(czas, ":");
             dzien=Integer.parseInt(StringData.nextToken());
-            miesiac=Integer.parseInt(StringData.nextToken());
+            miesiac=Integer.parseInt(StringData.nextToken())-1;
             rok=Integer.parseInt(StringData.nextToken());
             godzina=Integer.parseInt(StringCzas.nextToken());
             minuta=Integer.parseInt(StringCzas.nextToken());

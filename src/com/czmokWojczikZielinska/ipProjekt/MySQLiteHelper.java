@@ -1,10 +1,16 @@
 package com.czmokWojczikZielinska.ipProjekt;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.CharArrayBuffer;
+import android.database.ContentObserver;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -245,12 +251,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         ContentValues values = new ContentValues();
         values.put(KEY_DATA, dt.getData());
         values.put(KEY_CZAS, dt.getCzas());
-        values.put(KEY_CZYODBYTY, dt.getCzyBiegOdbyty());
+        values.put(KEY_CZYODBYTY, dt.getCzyBiegOdbyty().toString());
         int id=dt.getId();
 
-        db.update(TABLE_DATACZAS, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(id) });
+        db.update(TABLE_DATACZAS, values, KEY_ID + "=" + String.valueOf(id),null);
         db.close();
+
     }
 
     public void updateBieg(Bieg b)
@@ -262,10 +268,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         values.put(KEY_CZASBIEGU,b.getCzasBiegu());
         values.put(KEY_PREDKOSC,b.getPredkoscBiegu());
         values.put(KEY_CZASPRZEBIEGNIECIA,b.getCzasPrzebiegniecia());
-        values.put(KEY_DYSTANS,b.getPrzebiegnietyDystans());
+        values.put(KEY_DYSTANS,b.getPrzebiegnietyDystans().toString());
 
-        db.update(TABLE_BIEG, values, KEY_IDBIEG + " = ?",
-                new String[] { String.valueOf(b.getIdBiegu()) });
+
+        db.update(TABLE_BIEG, values, KEY_IDBIEG + " = "+b.getIdBiegu(),null);
         db.close();
     }
 

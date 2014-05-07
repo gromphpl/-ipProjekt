@@ -66,11 +66,65 @@ public class ListAdapterCustom extends BaseAdapter
 
         TabelaDataCzas dt = items.get(arg0);
 
-        data.setText(dt.getData());
-        czas.setText(dt.getCzas());
+        String dataTemp=FormatujWyswietlanieDATA(dt.getData());
+        String czasTemp=FormatujWyswietlanieCZAS(dt.getCzas());
+        data.setText(dataTemp);
+        czas.setText(czasTemp);
         odbyty.setChecked(dt.getCzyBiegOdbyty());
 
         return arg1;
+    }
+
+    String FormatujWyswietlanieDATA(String data)
+    {
+        int dlugoscDaty=data.length();
+        //max 10
+        if(dlugoscDaty!=10)
+        {
+            if(dlugoscDaty==8)
+            {
+                data="0"+data;
+                data=data.substring(0,3)+"0"+data.substring(3,data.length());
+            }
+
+            if(dlugoscDaty==9)
+            {
+                if(data.substring(2,3).contains("."))
+                {
+                    data=data.substring(0,3)+"0"+data.substring(3,data.length());
+                }
+                else
+                {
+                    data="0"+data;
+                }
+            }
+        }
+
+        return data;
+    }
+
+    String FormatujWyswietlanieCZAS(String czas)
+    {
+        int dlugoscCzasu=czas.length();
+        if(dlugoscCzasu==3)
+        {
+            czas="0"+czas;
+            czas=czas.substring(0,3)+"0"+czas.substring(3,czas.length());
+            dlugoscCzasu=czas.length();
+        }
+        if(dlugoscCzasu==4)
+        {
+            if(czas.substring(2,3).contains(":"))
+            {
+                czas=czas.substring(0,3)+"0"+czas.substring(3,czas.length());
+            }
+            else
+            {
+                czas="0"+czas;
+            }
+        }
+
+        return czas;
     }
 
 }

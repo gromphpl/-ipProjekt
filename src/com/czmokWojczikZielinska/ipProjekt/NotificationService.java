@@ -8,6 +8,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
 import android.os.Vibrator;
 
@@ -55,8 +58,10 @@ public class NotificationService extends Service {
 
         mManager.notify(0, notification);
 
+        Uri notif = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notif);
+        r.play();
         Vibrator v = (Vibrator) getApplicationContext().getSystemService(this.getApplicationContext().VIBRATOR_SERVICE);
-
         v.vibrate(500); //wibracja przez 500 ms
     }
 
