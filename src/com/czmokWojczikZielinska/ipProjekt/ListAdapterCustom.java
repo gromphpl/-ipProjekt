@@ -2,21 +2,21 @@ package com.czmokWojczikZielinska.ipProjekt;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.AdapterView.OnItemClickListener;
+
 /**
  * Created by Anna on 03.05.14.
  */
-public class ListAdapterCustom extends BaseAdapter
+public class ListAdapterCustom extends BaseAdapter implements View.OnClickListener
 {
     private List<TabelaDataCzas> items;
     Context mContext;
@@ -72,6 +72,8 @@ public class ListAdapterCustom extends BaseAdapter
         czas.setText(czasTemp);
         odbyty.setChecked(dt.getCzyBiegOdbyty());
 
+        odbyty.setOnClickListener(this);
+        arg1.setOnClickListener(new OnItemClickListener(arg0));
         return arg1;
     }
 
@@ -125,6 +127,25 @@ public class ListAdapterCustom extends BaseAdapter
         }
 
         return czas;
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+    }
+
+    private class OnItemClickListener implements View.OnClickListener
+    {
+        private int mPosition;
+        OnItemClickListener(int arg0)
+        {
+            mPosition = arg0;
+        }
+        @Override
+        public void onClick(View arg1)
+        {
+
+        }
     }
 
 }

@@ -65,7 +65,6 @@ public class UstawDateCzasBiegu extends Activity
                             {
                                 amList.add(new AlarmModel(i));
                                 i.setCzyBiegOdbyty(true);
-                                i.setData("31.12.2016");
                                 db.updateDataCzas(i);
                             }
                         }
