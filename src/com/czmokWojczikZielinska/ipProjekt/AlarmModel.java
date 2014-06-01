@@ -28,20 +28,19 @@ public class AlarmModel
 
     public AlarmModel(TabelaDataCzas dt)
     {
-        if(dt.getCzyBiegOdbyty()==false)
-        {
+
             String data=dt.getData();
             String czas=dt.getCzas();
             idDataCzas=dt.getId();
             StringTokenizer StringData = new StringTokenizer(data, ".");
             StringTokenizer StringCzas = new StringTokenizer(czas, ":");
             dzien=Integer.parseInt(StringData.nextToken());
-            miesiac=Integer.parseInt(StringData.nextToken())-1;
+            miesiac=Integer.parseInt(StringData.nextToken());
             rok=Integer.parseInt(StringData.nextToken());
             godzina=Integer.parseInt(StringCzas.nextToken());
             minuta=Integer.parseInt(StringCzas.nextToken());
             setKalendarz();
-        }
+
     }
 
     public void setDzien(int _dzien)

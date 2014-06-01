@@ -40,8 +40,8 @@ public class NotificationService extends Service {
 
         Intent intent1 = new Intent(this.getApplicationContext(), MyActivity.class); //otwiera przypomnienie
 
-        Notification notification = new Notification(R.drawable.ic_launcher,
-                "Powiadomienie- czas pobiegać!", System.currentTimeMillis());
+        Notification notification = new Notification(R.drawable.biegacz,
+                "Najwyższy czas pobiegac! :)", System.currentTimeMillis());
 
         intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -53,7 +53,7 @@ public class NotificationService extends Service {
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
         notification.setLatestEventInfo(this.getApplicationContext(),
-                "IP Projekt", "Powiadomienie- czas pobiegać!",
+                "Asystent biegu", "Najwyższy czas pobiegać! :)",
                 pendingNotificationIntent);
 
         mManager.notify(0, notification);

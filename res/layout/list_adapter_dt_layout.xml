@@ -3,42 +3,76 @@
 <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
-        android:clickable="true">
+        android:clickable="false" android:longClickable="false" android:background="@android:color/transparent">
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="adapterCzas"
             android:id="@+id/tvCzas" android:layout_gravity="center_vertical"
-            android:layout_marginLeft="27dp"
-            android:layout_alignBottom="@+id/cbCzyOdbyty" android:layout_toRightOf="@+id/textView"/>
+            android:layout_marginLeft="99dp"
+            android:layout_alignBottom="@+id/textView" android:layout_alignParentLeft="true"
+            android:textColor="#007cff" android:textStyle="bold|italic"
+            android:background="@android:color/black"/>
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zaplanowany"
+            android:text="Alarm"
             android:id="@+id/cbCzyOdbyty"
-            android:layout_alignTop="@+id/textView2" android:layout_alignParentRight="true"/>
+            android:enabled="true"
+            android:clickable="true" android:focusable="false" android:focusableInTouchMode="false"
+            android:layout_below="@+id/tvData" android:layout_alignParentRight="true"
+            android:layout_marginRight="24dp" android:textColor="#007cff" android:textStyle="bold"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="adapterData"
             android:id="@+id/tvData"
-            android:layout_marginTop="32dp"
-            android:layout_alignParentTop="true" android:layout_alignLeft="@+id/tvCzas"/>
+            android:layout_alignParentTop="true" android:layout_alignLeft="@+id/tvCzas" android:textColor="#007cff"
+            android:textStyle="bold|italic"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="CZAS: "
-            android:id="@+id/textView" android:layout_alignBottom="@+id/tvCzas" android:layout_alignParentLeft="true"
-            android:layout_marginLeft="22dp"/>
+            android:id="@+id/textView"
+            android:layout_marginTop="24dp" android:layout_below="@+id/tvData" android:layout_alignParentLeft="true"
+            android:layout_marginLeft="23dp" android:textStyle="bold"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="DATA: "
-            android:id="@+id/textView2" android:layout_alignBottom="@+id/tvData" android:layout_toLeftOf="@+id/tvCzas"/>
+            android:id="@+id/textView2"
+            android:layout_above="@+id/textView" android:layout_alignRight="@+id/textView" android:textStyle="bold"
+            android:background="@android:color/black"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DZIEŃ TYGODNIA: "
+            android:id="@+id/textView3"
+            android:layout_marginTop="19dp" android:layout_below="@+id/cbCzyOdbyty"
+            android:layout_alignLeft="@+id/textView" android:textStyle="bold"
+            android:background="@android:color/black"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="adapterDzienTyg"
+            android:id="@+id/tvDzienTyg"
+            android:textColor="#007cff" android:layout_alignBottom="@+id/textView3"
+            android:layout_toRightOf="@+id/textView3" android:layout_marginLeft="21dp" android:textStyle="bold|italic"
+            android:background="@android:color/black"/>
+    <Space
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:layout_below="@+id/tvDzienTyg"
+            android:layout_marginTop="32dp" android:layout_alignRight="@+id/cbCzyOdbyty" android:id="@+id/space"
+            android:background="@android:color/black"/>
 
 </RelativeLayout>

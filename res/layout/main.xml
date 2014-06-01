@@ -4,22 +4,37 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:gravity="center" android:weightSum="1">
+              android:gravity="center" android:weightSum="1" android:background="@drawable/tlo">
 
 
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.42"/>
     <Button
-            android:layout_width="wrap_content"
+            android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:text="Biegnij"
-            android:id="@+id/btnBiegnij" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/btnBiegnij" android:layout_gravity="center_horizontal" android:background="#007cff"
+            android:layout_weight="0.04" android:textStyle="bold"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07"/>
     <Button
-            android:layout_width="wrap_content"
+            android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:text="Ustal Harmonogram Biegów"
-            android:id="@+id/btnUstawDateCzas" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/btnUstawDateCzas" android:layout_gravity="center_horizontal" android:background="#007cff"
+            android:layout_weight="0.04" android:textStyle="bold"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07"/>
     <Button
-            android:layout_width="wrap_content"
+            android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:text="Pokaż zaplanowane biegi"
-            android:id="@+id/btnPokazZaplanowaneBiegi" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/btnPokazZaplanowaneBiegi" android:layout_gravity="center_horizontal"
+            android:background="#007cff" android:layout_weight="0.04" android:textStyle="bold"/>
 </LinearLayout>

@@ -1,9 +1,16 @@
 package com.czmokWojczikZielinska.ipProjekt;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +33,7 @@ public class ZaplanowaneBiegi extends Activity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zaplanowane_biegi);
+
         lv=(ListView) findViewById(R.id.listView);
         db=new MySQLiteHelper(this.getApplicationContext());
         List<TabelaDataCzas> dt;
@@ -37,23 +45,70 @@ public class ZaplanowaneBiegi extends Activity
         int i=adapter.getCount();
         if(i>0)
         {
+            registerForContextMenu(lv);
             lv.setAdapter(adapter);
+            lv.setLongClickable(true);
+            lv.setClickable(true);
+
+
         }
 
 
-        lv.setOnItemClickListener(new OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id)
-            {
-                Toast.makeText(getApplicationContext(), "Click ListItem Number " + position, Toast.LENGTH_LONG).show();
-            }
-        }
-        );
+
     }
     ListView lv;
     ListAdapterCustom adapter;
     MySQLiteHelper db;
+    int clickedPosition;
+    AlarmModel am;
+    UstawDateCzasBiegu dataCzas=new UstawDateCzasBiegu();
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_zaplanowane_biegi, menu);
+        menu.setHeaderTitle("Wybierz");
+    }
+
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        clickedPosition=info.position;
+        TabelaDataCzas obiekt=adapter.getItem(clickedPosition);
+        am=new AlarmModel(obiekt);
+        switch (item.getItemId()) {
+            case R.id.menuDelete:
+                if(obiekt.getCzyBiegOdbyty())
+                {
+                    SkasujAlarm(am);
+                }
+                UsunRekord(obiekt);
+                return true;
+            case R.id.menuUpdate:
+                if(obiekt.getCzyBiegOdbyty())
+                {
+                    SkasujAlarm(am);
+                    obiekt.setCzyBiegOdbyty(false);
+                    db.updateDataCzas(obiekt);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    obiekt.setCzyBiegOdbyty(true);
+                    db.updateDataCzas(obiekt);
+                    UstawAlarm(am);
+                    adapter.notifyDataSetChanged();
+                }
+                return  true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
 
     public void UsunJesliDataPrzeszla(List<TabelaDataCzas> dt)
     {
@@ -64,7 +119,7 @@ public class ZaplanowaneBiegi extends Activity
             StringTokenizer StringData = new StringTokenizer(dataTemp, ".");
             StringTokenizer StringCzas = new StringTokenizer(czasTemp, ":");
             int dzien=Integer.parseInt(StringData.nextToken());
-            int miesiac=Integer.parseInt(StringData.nextToken())-1;
+            int miesiac=Integer.parseInt(StringData.nextToken());
             int rok=Integer.parseInt(StringData.nextToken());
             int godzina=Integer.parseInt(StringCzas.nextToken());
             int minuta=Integer.parseInt(StringCzas.nextToken());
@@ -77,5 +132,46 @@ public class ZaplanowaneBiegi extends Activity
         }
 
     }
+
+    void UsunRekord(TabelaDataCzas obiekt)
+    {
+        db.deleteDataCzas(obiekt);
+        adapter.remove(clickedPosition);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void UstawAlarm(AlarmModel am)
+    {
+        Calendar dataGodzina=am.getCalendarDate();
+
+        int unikalneId=am.getID();//(int)dataGodzina.getTimeInMillis();
+
+        Intent myIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(),unikalneId,myIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.RTC, dataGodzina.getTimeInMillis(),pendingIntent);
+
+    }
+
+    public void SkasujAlarm(AlarmModel am)
+    {
+        Calendar dataGodzina=am.getCalendarDate();
+
+        int unikalneId=am.getID();//(int)dataGodzina.getTimeInMillis();
+
+        Intent myIntent = new Intent(this.getApplicationContext(), AlarmReceiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),unikalneId,myIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        alarmManager.cancel(pendingIntent);
+
+    }
+
+
 
 }
