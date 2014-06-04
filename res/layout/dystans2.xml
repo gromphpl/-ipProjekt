@@ -5,4 +5,23 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='Proszę wprowadzić długość trasy w metrach, oraz kliknąć pzycisk "Rozpocznij bieg":'
+            android:id="@+id/textView" android:layout_gravity="left|center_vertical"/>
+    <EditText
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/startbieg" android:layout_gravity="center"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/zle" android:layout_gravity="center"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rozpocznij bieg"
+            android:id="@+id/start" android:layout_gravity="left|center_vertical" android:layout_marginLeft="95dp"/>
 </LinearLayout>

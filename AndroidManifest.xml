@@ -18,6 +18,7 @@
         <activity android:name=".GPS"></activity>
         <activity android:name=".UstawDateCzasBiegu"/>
         <activity android:name=".ZaplanowaneBiegi"/>
+        <activity android:name=".dystans"/>
         <receiver android:name=".AlarmReceiver" >
         </receiver>
         <service

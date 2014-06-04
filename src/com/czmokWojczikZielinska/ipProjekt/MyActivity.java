@@ -50,7 +50,7 @@ public class MyActivity extends Activity {
                 {
                     public void onClick(View view)
                     {
-                        Intent myIntent = new Intent(view.getContext(), GPS.class);
+                        Intent myIntent = new Intent(view.getContext(), dystans.class);
                         startActivity(myIntent);
                     }
 
