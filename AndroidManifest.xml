@@ -16,10 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".GPS"></activity>
-        <activity android:name=".UstawDateCzasBiegu"/>
-        <activity android:name=".ZaplanowaneBiegi"/>
-        <activity android:name=".dystans"/>
+        <activity android:name=".GPS"
+                  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"></activity>
+        <activity android:name=".UstawDateCzasBiegu" android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".ZaplanowaneBiegi"  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".OdbyteBiegi"  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".dystans"  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"/>
         <receiver android:name=".AlarmReceiver" >
         </receiver>
         <service

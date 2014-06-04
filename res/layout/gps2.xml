@@ -3,60 +3,71 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:background="@drawable/tlo">
+        android:layout_height="fill_parent" android:background="@drawable/tlo" android:weightSum="1">
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:text="@string/use_gps" />
+            android:text="@string/use_gps"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvProvider"
-            android:text="---" />
+            android:text="---"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:text="@string/possiton" />
+            android:text="@string/possiton"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvLatitude" android:text="@string/width"/>
+            android:id="@+id/tvLatitude" android:text="@string/width"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvLongitude" android:text="@string/lenght"/>
+            android:id="@+id/tvLongitude" android:text="@string/lenght"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:layout_gravity="center" android:text="@string/extra_infp"/>
+            android:layout_gravity="center" android:text="@string/extra_infp"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="---"
-            android:id="@+id/tvInformations" />
+            android:id="@+id/tvInformations"
+            android:background="@android:color/black"/>
     <Button
-            android:layout_width="wrap_content"
+            android:layout_width="166dp"
             android:layout_height="wrap_content"
             android:text="Zakończ bieg wcześniej"
-            android:id="@+id/button1" android:layout_gravity="right|center_vertical"/>
+            android:id="@+id/button1" android:layout_gravity="right|center_vertical"
+            android:background="#007cff" android:textStyle="bold" android:layout_weight="0.04"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="..."
-            android:id="@+id/textView1" android:layout_gravity="left|center_vertical"/>
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="..."
-            android:id="@+id/textView"/>
+            android:id="@+id/textView1" android:layout_gravity="left|center_vertical"
+            android:background="@android:color/black"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="..."
-            android:id="@+id/textView2" android:layout_gravity="left|center_vertical"/>
+            android:id="@+id/textView"
+            android:background="@android:color/black"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:id="@+id/textView2" android:layout_gravity="left|center_vertical"
+            android:background="@android:color/black"/>
 </LinearLayout>

@@ -9,6 +9,7 @@ package com.czmokWojczikZielinska.ipProjekt;
  */
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -45,6 +46,8 @@ public class GPS extends Activity {
     //droga pobierana od użytkownika-dystans do przebiegnięcia.
     int droga=d.dalej;
     double czas=0;
+    String czasBiegu="";
+    String dataBiegu="";
 
 
     private LocationManager locationManager;
@@ -80,21 +83,20 @@ public class GPS extends Activity {
         tvInformations = (TextView) findViewById(R.id.tvInformations);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-            tvProvider.setText("GPS włączaony.");
-        else
-            tvProvider.setText("Gps nie jest włączony, proszę włączyć.");
-
-
-        Calendar kal=Calendar.getInstance();
+        { tvProvider.setText("GPS włączony.");
+        Calendar kal=Calendar.getInstance(Locale.getDefault());
         int dzien=kal.get(Calendar.DATE);
         int miesiac=kal.get(Calendar.MONTH);
         int rok=kal.get(Calendar.YEAR);
         int godzina=kal.get(Calendar.HOUR);
         int minuta=kal.get(Calendar.MINUTE);
 
-        /*data=dzien+"."+miesiac+"."+rok;
-        czas=godzina+":"+minuta;
-        */
+        dataBiegu=dzien+"."+miesiac+"."+rok;
+        czasBiegu=godzina+":"+minuta;
+        }
+        else
+            tvProvider.setText("Gps nie jest włączony, proszę włączyć.");
+
 
         koniec.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -150,7 +152,8 @@ public class GPS extends Activity {
         MySQLiteHelper db=new MySQLiteHelper(this);
         Bieg b=new Bieg();
         // b.setDataBiegu(data);
-        // b.setCzasBiegu(t);
+        b.setCzasBiegu(czasBiegu);
+        b.setDataBiegu(dataBiegu);
         b.setPrzebiegnietyDystans(d);
         b.setPredkoscBiegu(p);
         b.setCzasPrzebiegniecia(t);
@@ -187,8 +190,16 @@ public class GPS extends Activity {
             if((wynik2)>(droga+(droga*0.1)))
             {
             //end.setText("wynik: "+ wynik+" licznik: "+j);
-            predkosc=wynik/(j-1);
-            czas=droga/predkosc;
+
+                czas=0;
+                predkosc=0;
+                try
+                {
+                predkosc=wynik/(j-1);
+                czas=droga/predkosc;
+                }
+                catch (Exception ex){}
+
             // String czas2=Double.toString(czas);
             // s.setText("Średnia prędkość: "+predkosc);
             s.setText("Dystans: "+droga+" Średnia prędkość: "+predkosc);

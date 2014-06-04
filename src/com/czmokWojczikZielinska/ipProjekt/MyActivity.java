@@ -20,6 +20,7 @@ public class MyActivity extends Activity {
         Button btnUstawDateICzas = (Button) findViewById(R.id.btnUstawDateCzas);
         Button btnPokazZaplanowaneBiegi=(Button) findViewById(R.id.btnPokazZaplanowaneBiegi);
         Button btnBiegnij=(Button)findViewById(R.id.btnBiegnij);
+        Button btnHistoria=(Button)findViewById(R.id.btnHistoriaBiegow);
 
         btnUstawDateICzas.setOnClickListener
                 (new View.OnClickListener()
@@ -27,6 +28,18 @@ public class MyActivity extends Activity {
                     public void onClick(View view)
                     {
                         Intent myIntent = new Intent(view.getContext(), UstawDateCzasBiegu.class);
+                        startActivity(myIntent);
+                    }
+
+                }
+                );
+
+        btnHistoria.setOnClickListener
+                (new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        Intent myIntent = new Intent(view.getContext(), OdbyteBiegi.class);
                         startActivity(myIntent);
                     }
 

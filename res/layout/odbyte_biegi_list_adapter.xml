@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/transparent">
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Data i czas biegu: "
+            android:id="@+id/textView"
+            android:textStyle="bold"
+            android:background="@android:color/black"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/tvDataCzasBiegu" android:layout_gravity="center_horizontal"
+            android:textColor="#007cff"
+            android:background="@android:color/black"
+            android:textStyle="bold"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Przebiegnięty dystans: "
+            android:id="@+id/textView2"
+            android:textStyle="bold"
+            android:background="@android:color/black"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/tvDystans" android:layout_gravity="center_horizontal"
+            android:textColor="#007cff"
+            android:background="@android:color/black"
+            android:textStyle="bold"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Średnia prędkość biegu: "
+            android:id="@+id/textView3"
+            android:textStyle="bold"
+            android:background="@android:color/black"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/tvPredkoscBiegu" android:layout_gravity="center_horizontal"
+            android:textColor="#007cff"
+            android:background="@android:color/black"
+            android:textStyle="bold"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Czas przebiegnięcia: "
+            android:id="@+id/textView4"
+            android:textStyle="bold"
+            android:background="@android:color/black"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/tvCzasPrzebiegmiecia" android:layout_gravity="center_horizontal"
+            android:textColor="#007cff"
+            android:background="@android:color/black"
+            android:textStyle="bold"/>
+</LinearLayout>

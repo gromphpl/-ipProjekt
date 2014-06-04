@@ -203,15 +203,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper
 
         if (cursor.moveToFirst())
         {
-            do {
-                Bieg bieg = new Bieg();
-                bieg.setIdBiegu(Integer.parseInt(cursor.getString(0))); //id biegu
-                bieg.setDataBiegu(cursor.getString(1)); //data biegu
-                bieg.setCzasBiegu(cursor.getString(2)); //czas biegu
-                bieg.setPrzebiegnietyDystans(Integer.parseInt(cursor.getString(3))); // dystans
-                bieg.setPredkoscBiegu(Double.parseDouble(cursor.getString(4))); //predkosc
-                bieg.setCzasPrzebiegniecia(Double.parseDouble(cursor.getString(5))); //czas przebiegniecia
-                biegList.add(bieg);
+            do
+            {   try
+                {
+                    Bieg bieg = new Bieg();
+                    bieg.setIdBiegu(Integer.parseInt(cursor.getString(0))); //id biegu
+                    bieg.setDataBiegu(cursor.getString(1)); //data biegu
+                    bieg.setCzasBiegu(cursor.getString(2)); //czas biegu
+                    bieg.setPrzebiegnietyDystans(Integer.parseInt(cursor.getString(3))); // dystans
+                    bieg.setPredkoscBiegu(Double.parseDouble(cursor.getString(4))); //predkosc
+                    bieg.setCzasPrzebiegniecia(Double.parseDouble(cursor.getString(5))); //czas przebiegniecia
+                    biegList.add(bieg);
+                }
+                catch(Exception ex){}
             }
             while (cursor.moveToNext());
         }

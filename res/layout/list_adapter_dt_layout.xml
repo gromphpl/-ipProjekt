@@ -68,11 +68,6 @@
             android:textColor="#007cff" android:layout_alignBottom="@+id/textView3"
             android:layout_toRightOf="@+id/textView3" android:layout_marginLeft="21dp" android:textStyle="bold|italic"
             android:background="@android:color/black"/>
-    <Space
-            android:layout_width="20px"
-            android:layout_height="20px"
-            android:layout_below="@+id/tvDzienTyg"
-            android:layout_marginTop="32dp" android:layout_alignRight="@+id/cbCzyOdbyty" android:id="@+id/space"
-            android:background="@android:color/black"/>
+
 
 </RelativeLayout>
