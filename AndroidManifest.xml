@@ -7,9 +7,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
+    <application android:label="Asystent biegu" android:icon="@drawable/biegacz">
         <activity android:name="MyActivity"
-                  android:label="@string/app_name">
+                  android:label="Asystent biegu"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

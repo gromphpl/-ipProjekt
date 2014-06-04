@@ -4,61 +4,73 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:gravity="center" android:weightSum="1">
+              android:gravity="center" android:weightSum="1" android:background="@drawable/tlo">
 
 
     <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="47dp"
             android:text="Ustaw"
-            android:id="@+id/btnUstaw" android:layout_gravity="center_horizontal|top"/>
+            android:id="@+id/btnUstaw" android:layout_gravity="center_horizontal|top" android:background="#007cff"
+            android:textAlignment="center" android:textStyle="bold"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            />
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
+            android:layout_width="321dp"
             android:layout_height="wrap_content" android:layout_gravity="left|bottom" android:layout_marginLeft="50dp">
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Poniedziałek"
-                android:id="@+id/cbPon"/>
+                android:text="Poniedziałek "
+                android:id="@+id/cbPon" android:textColor="#ffffff" android:textStyle="bold"
+                android:background="@android:color/black"/>
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wtorek"
-                android:id="@+id/cbWt"/>
+                android:text="Wtorek "
+                android:id="@+id/cbWt" android:textColor="#ffffff" android:textStyle="bold"
+                android:background="@android:color/black"/>
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Środa"
-                android:id="@+id/cbSr"/>
+                android:text="Środa "
+                android:id="@+id/cbSr" android:textColor="#ffffff" android:textStyle="bold"
+                android:background="@android:color/black"/>
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Czwartek"
-                android:id="@+id/cbCzw"/>
+                android:text="Czwartek "
+                android:id="@+id/cbCzw" android:textColor="#ffffff" android:textStyle="bold"
+                android:background="@android:color/black"/>
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Piątek"
-                android:id="@+id/cbPt"/>
+                android:text="Piątek "
+                android:id="@+id/cbPt" android:textColor="#ffffff" android:textStyle="bold"
+                android:background="@android:color/black"/>
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sobota"
-                android:id="@+id/cbSb"/>
+                android:text="Sobota "
+                android:id="@+id/cbSb" android:textColor="#ffffff" android:textStyle="bold"
+                android:background="@android:color/black"/>
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Niedziela"
-                android:id="@+id/cbNd"/>
+                android:text="Niedziela "
+                android:id="@+id/cbNd" android:textColor="#ffffff" android:textStyle="bold"
+                android:background="@android:color/black"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" android:weightSum="1">
         <TimePicker
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/timePicker" android:layout_gravity="center_vertical"/>
+                android:id="@+id/timePicker"/>
     </LinearLayout>
 </LinearLayout>

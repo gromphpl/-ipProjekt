@@ -3,6 +3,7 @@ package com.czmokWojczikZielinska.ipProjekt;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -55,31 +56,10 @@ public class UstawDateCzasBiegu extends Activity
 
                         UsunJesliDataPrzeszla(dt);
 
-                        dt.clear();
 
-                        dt=db.getAllDataCzas();
-
-                        for(TabelaDataCzas i:dt)
-                        {
-                            if(i.getCzyBiegOdbyty()==false)
-                            {
-                                amList.add(new AlarmModel(i));
-                                i.setCzyBiegOdbyty(true);
-                                db.updateDataCzas(i);
-                            }
-                        }
-
-
-
-                        for(int i=0;i<amList.size();i++)
-                        {
-                            UstawAlarm(amList.get(i));
-
-                        }
-
-
-                        Intent myIntent = new Intent(view.getContext(), MyActivity.class);
+                        Intent myIntent = new Intent(view.getContext(), ZaplanowaneBiegi.class);
                         //myIntent.putExtra("obecnyDzienTygodnia",DzienTygodnia());
+                        finish();
                         startActivityForResult(myIntent, 0);
 
                     }
@@ -87,6 +67,8 @@ public class UstawDateCzasBiegu extends Activity
                 }
                 );
     }
+
+
 
     public ArrayList<Calendar> listaDatBiegow=new ArrayList<Calendar>();
     public List<String> czas=new ArrayList<String>();
@@ -106,13 +88,13 @@ public class UstawDateCzasBiegu extends Activity
         TimePicker wybranyCzasBiegu=(TimePicker) findViewById(R.id.timePicker);
         wybranyCzasBiegu.clearFocus();
 
-        Calendar obecnaData=new GregorianCalendar();//teraz
-        Calendar wybranaDataICzas=new GregorianCalendar();//przez uzytkownika
-        obecnaData.getInstance();
+        Calendar obecnaData=Calendar.getInstance(TimeZone.getDefault());//teraz
+        Calendar wybranaDataICzas=new GregorianCalendar(TimeZone.getDefault());
+        //obecnaData.getInstance();
         int godzina = wybranyCzasBiegu.getCurrentHour();
         int minuta = wybranyCzasBiegu.getCurrentMinute();
         int rok=obecnaData.get(Calendar.YEAR);
-        int miesiac=obecnaData.get(Calendar.MONTH)+1;
+        int miesiac=obecnaData.get(Calendar.MONTH);
         int dzien=obecnaData.get(Calendar.DAY_OF_MONTH);
         String aktualnyDzienTygodnia=DzienTygodnia();
 
@@ -612,22 +594,6 @@ public class UstawDateCzasBiegu extends Activity
         return  dayOfTheWeek;
     }
 
-    public void UstawAlarm(AlarmModel am)
-    {
-
-        // UstawDateCzasBiegu to obecna Activity a AlarmReceiver to
-        // BoradCastReceiver
-        Intent myIntent = new Intent(UstawDateCzasBiegu.this, AlarmReceiver.class);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(UstawDateCzasBiegu.this,
-                0, myIntent, 0);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-        alarmManager.set(AlarmManager.RTC, am.getCalendarDate().getTimeInMillis(),
-                pendingIntent);
-
-    }
 
     public void UsunJesliDataPrzeszla(List<TabelaDataCzas> dt)
     {
@@ -638,7 +604,7 @@ public class UstawDateCzasBiegu extends Activity
             StringTokenizer StringData = new StringTokenizer(dataTemp, ".");
             StringTokenizer StringCzas = new StringTokenizer(czasTemp, ":");
             int dzien=Integer.parseInt(StringData.nextToken());
-            int miesiac=Integer.parseInt(StringData.nextToken())-1;
+            int miesiac=Integer.parseInt(StringData.nextToken());
             int rok=Integer.parseInt(StringData.nextToken());
             int godzina=Integer.parseInt(StringCzas.nextToken());
             int minuta=Integer.parseInt(StringCzas.nextToken());
