@@ -75,4 +75,9 @@
             android:textColor="#007cff"
             android:background="@android:color/black"
             android:textStyle="bold"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""/>
 </LinearLayout>

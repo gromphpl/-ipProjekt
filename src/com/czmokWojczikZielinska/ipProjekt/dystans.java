@@ -39,6 +39,7 @@ public class dystans extends Activity {
                         int dystans=Integer.parseInt(edystans);
                         dalej=dystans;
                         Intent myIntent = new Intent(view.getContext(), GPS.class);
+                        finish();
                         startActivity(myIntent);
                     }catch(Exception e)
                         {

@@ -11,6 +11,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -21,9 +24,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -48,20 +53,31 @@ public class GPS extends Activity {
     double czas=0;
     String czasBiegu="";
     String dataBiegu="";
+    double przebiegnietyDystans=0;
+    long tStart=0;
+    long tEnd=0;
+    Chronometer timer;
+
 
 
     private LocationManager locationManager;
     private Location savedLocation = null;
-    private LocationListener locationListener = new LocationListener() {
+    private LocationListener locationListener = new LocationListener()
+    {
         public void onStatusChanged(String provider, int status, Bundle extras) {}
 
         public void onProviderEnabled(String provider) {}
 
         public void onProviderDisabled(String provider) {}
 
-        public void onLocationChanged(Location location) {
-
+        public void onLocationChanged(Location location)
+        {
+            if(j==1.0)
+            {
+                tStart=System.currentTimeMillis();
+            }
             showLocation(location);
+            CzyLokalizacjaWlaczona();
             showAdditionalInfo(location);
             if (savedLocation == null)
                 savedLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -83,47 +99,107 @@ public class GPS extends Activity {
         tvInformations = (TextView) findViewById(R.id.tvInformations);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-        { tvProvider.setText("GPS włączony.");
+        {
+            tvProvider.setText("GPS włączony.");
         Calendar kal=Calendar.getInstance(Locale.getDefault());
         int dzien=kal.get(Calendar.DATE);
         int miesiac=kal.get(Calendar.MONTH);
         int rok=kal.get(Calendar.YEAR);
-        int godzina=kal.get(Calendar.HOUR);
+        int godzina=kal.get(Calendar.HOUR_OF_DAY);
         int minuta=kal.get(Calendar.MINUTE);
 
         dataBiegu=dzien+"."+miesiac+"."+rok;
         czasBiegu=godzina+":"+minuta;
         }
         else
+        {
             tvProvider.setText("Gps nie jest włączony, proszę włączyć.");
+            Ustawienia();
+            CzyLokalizacjaWlaczona();
+        }
 
 
-        koniec.setOnClickListener(new View.OnClickListener() {
+        koniec.setOnClickListener(new View.OnClickListener()
+        {
             public void onClick(View v) {
 
-
-                predkosc=wynik/(j-1);
-                czas=droga/predkosc;
-                 // String czas2=Double.toString(czas);
+                tEnd=System.currentTimeMillis();
+                droga=(int)przebiegnietyDystans;
+                czas=(tEnd-tStart)/1000;
+                //predkosc=wynik/(j-1);
+                predkosc=droga/czas;
+                predkosc=(int)predkosc*100;
+                predkosc=predkosc/100;
+                // String czas2=Double.toString(czas);
                 // s.setText("Średnia prędkość: "+predkosc);
-                s.setText("Dystans: "+droga+" Średnia prędkość: "+predkosc);
-                t.setText("Czas: "+ czas);
+                s.setText("Dystans: "+droga+" m "+" Średnia prędkość: "+predkosc+ " m/s");
+                t.setText("Czas: "+ czas + " s ");
                 //dodanie do bazy danych wartosci po przycisnieciu przycisku koniec
                 dodajDoBazy(czas, droga, predkosc);
-
-
-
+                //zatrzymaj dzialanie gps
+                onStop();
+                savedLocation=null;
+//                Intent myIntent = new Intent(GPS.this, OdbyteBiegi.class);
+//                finish();
+//                startActivityForResult(myIntent, 0);
 
             }
         });
     }
 
+    private void CzyLokalizacjaWlaczona()
+    {
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        {
+            tvProvider.setText("GPS włączony.");
+            if(j==1)
+            {
+                Calendar kal=Calendar.getInstance(Locale.getDefault());
+                int dzien=kal.get(Calendar.DATE);
+                int miesiac=kal.get(Calendar.MONTH);
+                int rok=kal.get(Calendar.YEAR);
+                int godzina=kal.get(Calendar.HOUR_OF_DAY);
+                int minuta=kal.get(Calendar.MINUTE);
+
+                dataBiegu=dzien+"."+miesiac+"."+rok;
+                czasBiegu=godzina+":"+minuta;
+
+            }
+        }
+    }
+    public void Ustawienia()
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setTitle("Ustawienia GPS");
+
+        alertDialog.setMessage("GPS jest wyłączony. Czy chcesz przejść do panelu ustawień?");
+
+        alertDialog.setPositiveButton("Ustawienia", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(intent,0);
+            }
+        });
+
+        alertDialog.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertDialog.show();
+    }
+
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
         locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
-                3000, 2, locationListener);
+                1000, 1, locationListener);
+
     }
 
     @Override
@@ -151,7 +227,6 @@ public class GPS extends Activity {
         v2.vibrate(500); //wibracja przez 500 ms
         MySQLiteHelper db=new MySQLiteHelper(this);
         Bieg b=new Bieg();
-        // b.setDataBiegu(data);
         b.setCzasBiegu(czasBiegu);
         b.setDataBiegu(dataBiegu);
         b.setPrzebiegnietyDystans(d);
@@ -159,12 +234,28 @@ public class GPS extends Activity {
         b.setCzasPrzebiegniecia(t);
         db.dodajRekordBieg(b);
     }
-    private void showAdditionalInfo(Location location) {
+
+    private void showAdditionalInfo(Location location)
+    {
         String infos = "Dystans: ";
-        if (savedLocation == null || location == null) {
+
+        if (savedLocation == null || location == null)
+        {
             infos += "can't calculate";
-        } else {
+        }
+        else
+        {
             infos += savedLocation.distanceTo(location) + "m\n";
+            if(j==1)
+            {
+                przebiegnietyDystans=0;
+            }
+            else
+            {
+            przebiegnietyDystans+=Math.abs(savedLocation.distanceTo(location)-przebiegnietyDystans);
+
+            }
+            //przebiegnietyDystans=przebiegnietyDystans+(przebiegnietyDystans/j);
            /* if(savedLocation.distanceTo(location)> droga+(droga*0.20));
             {
                 predkosc=wynik/(j-1);
@@ -185,27 +276,29 @@ public class GPS extends Activity {
 
             j++;
             wynik=wynik+location.getSpeed();
-            double wynik2;
-            wynik2= wynik/(j-1);
-            if((wynik2)>(droga+(droga*0.1)))
+            //double wynik2;
+            //wynik2= wynik/(j-1);
+            double odleglosc=droga+(droga*0.1);
+            if(przebiegnietyDystans>=odleglosc)
             {
             //end.setText("wynik: "+ wynik+" licznik: "+j);
 
-                czas=0;
-                predkosc=0;
-                try
-                {
-                predkosc=wynik/(j-1);
-                czas=droga/predkosc;
-                }
-                catch (Exception ex){}
-
+                tEnd=System.currentTimeMillis();
+                czas=(tEnd-tStart)/1000;
+                predkosc=droga/czas;
+                predkosc=(int)predkosc*100;
+                predkosc=predkosc/100;
             // String czas2=Double.toString(czas);
             // s.setText("Średnia prędkość: "+predkosc);
-            s.setText("Dystans: "+droga+" Średnia prędkość: "+predkosc);
-            t.setText("Czas: "+ czas);
+            s.setText("Dystans: "+droga+" m "+" Średnia prędkość: "+predkosc+ " m/s");
+            t.setText("Czas: "+ czas + " s ");
             //dodanie do bazy danych wartosci po przycisnieciu przycisku koniec
             dodajDoBazy(czas, droga, predkosc);
+            onStop();
+                savedLocation=null;
+//            Intent myIntent = new Intent(GPS.this, OdbyteBiegi.class);
+//            finish();
+//            startActivityForResult(myIntent, 0);
             }
 
 
