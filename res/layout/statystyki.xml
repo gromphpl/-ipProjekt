@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Statystyki miesięczne"
+            android:id="@+id/btnStatystykiMsc" android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp" android:layout_marginBottom="20dp" android:background="#077cff"
+            android:height="30dp"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Całkowity przebiegnięty dystans (km):"
+            android:id="@+id/textView"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="---"
+            android:id="@+id/tvCalkowityDystans" android:layout_gravity="center_horizontal"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Średnia prędkość (m/s):"
+            android:id="@+id/textView2"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="---"
+            android:id="@+id/tvSredniaPredkosc" android:layout_gravity="center_horizontal"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lytChart"
+            android:orientation="vertical">
+    </LinearLayout>
+</LinearLayout>

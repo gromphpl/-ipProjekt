@@ -27,6 +27,14 @@
                   android:configChanges="orientation|keyboardHidden"/>
         <activity android:name=".dystans"  android:screenOrientation="portrait"
                   android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".Statystyki"  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".StatystykiMsc"  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".DaneOsobowe"  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".UzpupelnijProfil"  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"/>
         <receiver android:name=".AlarmReceiver" >
         </receiver>
         <service

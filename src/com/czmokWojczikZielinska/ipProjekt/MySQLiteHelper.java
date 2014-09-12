@@ -40,6 +40,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         // Stworz tabele Bieg
         String CREATE_Bieg_TABLE = "CREATE TABLE Bieg (idBiegu INTEGER PRIMARY KEY AUTOINCREMENT, dataBiegu TEXT, czasBiegu TEXT, przebiegnietyDystans INTEGER, predkoscBiegu DOUBLE, czasPrzebiegniecia DOUBLE )";
         db.execSQL(CREATE_Bieg_TABLE);
+
+        //Stworz tabele DaneOsoby
+        String CREATE_DaneOsoby_TABLE= "CREATE TABLE DaneOsoby (idOsoby INTEGER PRIMARY KEY AUTOINCREMENT, imie TEXT, wiek INTEGER, waga INTEGER, wzrost INTEGER)";
+        db.execSQL(CREATE_DaneOsoby_TABLE);
     }
 
 
@@ -49,12 +53,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         //usun tabele jesli istnieja
         db.execSQL("DROP TABLE IF EXISTS DataCzas");
         db.execSQL("DROP TABLE IF EXISTS Bieg");
+        db.execSQL("DROP TABLE IF EXISTS DaneOsoby");
         this.onCreate(db);
     }
 
     // nazwy tabel
     private static final String TABLE_DATACZAS = "DataCzas";
     private static final String TABLE_BIEG = "Bieg";
+    private static final String TABLE_DANEOSOBY="DaneOsoby";
 
     // nazwy kolumn tabeli DataCzas
     private static final String KEY_ID = "id";
@@ -70,8 +76,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper
     private static final String KEY_PREDKOSC ="predkoscBiegu";
     private static final String KEY_CZASPRZEBIEGNIECIA ="czasPrzebiegniecia";
 
+    //nazwy kolumn tabeli DaneOsoby
+    private static final String KEY_IDOSOBY="idOsoby";
+    private static final String KEY_IMIE="imie";
+    private static final String KEY_WIEK="wiek";
+    private static final String KEY_WAGA="waga";
+    private static final String KEY_WZROST="wzrost";
+
     private static final String[] COLUMNS_DATACZAS = {KEY_ID,KEY_DATA,KEY_CZAS,KEY_CZYODBYTY};
     private static final String[] COLUMNS_BIEG={KEY_IDBIEG,KEY_DATABIEGU,KEY_CZASBIEGU,KEY_DYSTANS,KEY_PREDKOSC,KEY_CZASPRZEBIEGNIECIA};
+    private static final String[] COLUMNS_DANEOSOBY={KEY_IDOSOBY,KEY_IMIE,KEY_WIEK,KEY_WAGA,KEY_WZROST};
 
     //nowy rekord do tabeli DataCzas
     public void dodajRekordDataCzas(TabelaDataCzas dt)
@@ -103,6 +117,21 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         values.put(KEY_PREDKOSC,b.getPredkoscBiegu());
 
         db.insert(TABLE_BIEG, null, values);
+
+        db.close();
+    }
+
+    public void dodajRekordDaneOsoby(DaneOsoby d)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_IMIE, d.getImie().toString());
+        values.put(KEY_WIEK, d.getWiek());
+        values.put(KEY_WAGA,d.getWaga());
+        values.put(KEY_WZROST,d.getWzrost());
+
+        db.insert(TABLE_DANEOSOBY, null, values);
 
         db.close();
     }
@@ -165,6 +194,25 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         cursor.close();
         db.close();
         return pokazB;
+    }
+
+    public DaneOsoby showOneDaneOsoby(int id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_DANEOSOBY, new String[] { KEY_IDOSOBY,
+                KEY_IMIE, KEY_WIEK, KEY_WAGA,KEY_WZROST }, KEY_IDOSOBY + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        DaneOsoby d = new DaneOsoby();
+        d.setId(Integer.parseInt(cursor.getString(0)));
+        d.setImie(cursor.getString(1));
+        d.setWiek(Integer.parseInt(cursor.getString(2)));
+        d.setWaga(Integer.parseInt(cursor.getString(3)));
+        d.setWzrost(Integer.parseInt(cursor.getString(4)));
+        return d;
     }
 
     public List<TabelaDataCzas> getAllDataCzas() {
@@ -247,6 +295,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         return cursor.getCount();
     }
 
+    public int getDaneOsobyCount()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String count = "SELECT count(*) FROM "+ TABLE_DANEOSOBY;
+        Cursor mcursor = db.rawQuery(count, null);
+        int icount=0;
+        if(mcursor!=null)
+        {
+        mcursor.moveToFirst();
+        icount = mcursor.getInt(0);
+        }
+        return  icount;
+    }
+
 
     public void updateDataCzas(TabelaDataCzas dt)
     {
@@ -279,6 +341,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         db.close();
     }
 
+    public void updateDaneOsoby(DaneOsoby d)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_IMIE,d.getImie());
+        values.put(KEY_WIEK,d.getWiek());
+        values.put(KEY_WAGA,d.getWaga());
+        values.put(KEY_WZROST,d.getWzrost());
+
+        db.update(TABLE_DANEOSOBY, values, "idOsoby =?",new String[] {String.valueOf(d.getId())});
+        db.close();
+    }
+
     public void deleteDataCzas(TabelaDataCzas dt)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -292,6 +368,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_BIEG, KEY_IDBIEG + " = ?",
                 new String[] { String.valueOf(b.getIdBiegu()) });
+        db.close();
+    }
+
+    public void deleteDaneOsoby(DaneOsoby d)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_DANEOSOBY, KEY_IDOSOBY + " = ?",
+                new String[] { String.valueOf(d.getId()) });
         db.close();
     }
 

@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@drawable/tlo" android:weightSum="1">
+              android:weightSum="1">
 
     <TextView
             android:layout_width="wrap_content"
@@ -32,5 +32,5 @@
             android:layout_height="wrap_content"
             android:text="Rozpocznij bieg"
             android:id="@+id/start" android:layout_gravity="left|center_vertical" android:layout_marginLeft="95dp"
-            android:textStyle="bold" android:background="#007cff" android:layout_weight="0.06"/>
+            android:textStyle="bold" android:layout_weight="0.06" android:background="#007cff"/>
 </LinearLayout>

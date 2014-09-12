@@ -21,6 +21,8 @@ public class MyActivity extends Activity {
         Button btnPokazZaplanowaneBiegi=(Button) findViewById(R.id.btnPokazZaplanowaneBiegi);
         Button btnBiegnij=(Button)findViewById(R.id.btnBiegnij);
         Button btnHistoria=(Button)findViewById(R.id.btnHistoriaBiegow);
+        Button btnStatystyki=(Button)findViewById(R.id.btnStatystyki);
+        Button btnPersonalizuj=(Button)findViewById(R.id.btnPersonalizuj);
 
         btnUstawDateICzas.setOnClickListener
                 (new View.OnClickListener()
@@ -28,6 +30,18 @@ public class MyActivity extends Activity {
                     public void onClick(View view)
                     {
                         Intent myIntent = new Intent(view.getContext(), UstawDateCzasBiegu.class);
+                        startActivity(myIntent);
+                    }
+
+                }
+                );
+
+        btnPersonalizuj.setOnClickListener
+                (new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        Intent myIntent = new Intent(view.getContext(), DaneOsobowe.class);
                         startActivity(myIntent);
                     }
 
@@ -64,6 +78,17 @@ public class MyActivity extends Activity {
                     public void onClick(View view)
                     {
                         Intent myIntent = new Intent(view.getContext(), dystans.class);
+                        startActivity(myIntent);
+                    }
+
+                }
+                );
+        btnStatystyki.setOnClickListener
+                (new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        Intent myIntent = new Intent(view.getContext(), Statystyki.class);
                         startActivity(myIntent);
                     }
 

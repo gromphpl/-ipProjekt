@@ -7,51 +7,40 @@
               android:gravity="center" android:weightSum="1" android:background="@drawable/tlo">
 
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:layout_gravity="center_horizontal" android:layout_weight="0.49"/>
     <Button
             android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:text="Biegnij"
-            android:id="@+id/btnBiegnij" android:layout_gravity="center_horizontal" android:background="#007cff"
-            android:layout_weight="0.04" android:textStyle="bold"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            />
+            android:id="@+id/btnBiegnij" android:layout_gravity="center_horizontal" android:background="#077cff"
+            android:layout_weight="0.04" android:textStyle="bold" android:layout_marginTop="120dp"/>
     <Button
             android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:text="Ustal harmonogram Biegów"
             android:id="@+id/btnUstawDateCzas" android:layout_gravity="center_horizontal" android:background="#007cff"
-            android:layout_weight="0.04" android:textStyle="bold"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            />
+            android:layout_weight="0.04" android:textStyle="bold" android:layout_marginTop="20dp"/>
     <Button
             android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:text="Pokaż zaplanowane biegi"
             android:id="@+id/btnPokazZaplanowaneBiegi" android:layout_gravity="center_horizontal"
-            android:background="#007cff" android:layout_weight="0.04" android:textStyle="bold"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""/>
+            android:background="#007cff" android:layout_weight="0.04" android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
     <Button
             android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:text="Historia biegów"
-            android:id="@+id/btnHistoriaBiegow" android:layout_gravity="center_horizontal" android:layout_weight="0.04"
-            android:textStyle="bold" android:background="#007cff"/>
+            android:id="@+id/btnHistoriaBiegow" android:layout_weight="0.04"
+            android:textStyle="bold" android:background="#007cff" android:layout_marginTop="20dp"/>
+    <Button
+            android:layout_width="265dp"
+            android:layout_height="wrap_content"
+            android:text="Statystyki"
+            android:id="@+id/btnStatystyki"
+            android:textStyle="bold" android:background="#007cff" android:layout_weight="0.04"
+            android:layout_marginTop="20dp"/>
+    <Button android:layout_width="265dp" android:layout_height="wrap_content" android:text="Personalizuj"
+            android:id="@+id/btnPersonalizuj" android:background="#007cff"
+            android:layout_weight="0.04" android:textStyle="bold" android:singleLine="false"
+            android:layout_marginTop="20dp"/>
 </LinearLayout>
